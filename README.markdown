@@ -7,14 +7,8 @@ This is a very simple to use widget that perfect for open source projects sites.
 
 How to use
 ----------
-1. Place 'github.commits.widget-min.js'  into your javascript folder.
-2. Add div to hold the information
-	'<div id="github-commits"></div>'.
-	
-3. Add reference to widget script 
-	'<script src="js/mylibs/github.commits.widget.combined-min.js"></script>'.
-	
-4. Add script such script on page.
+Reference 'github.commits.widget-min.js' and containter div and place such script.
+
 	<script>
 		$(function() {
 			$('#github-commits').githubInfoWidget(
@@ -26,6 +20,7 @@ where, user is your github account, repo is name of repository and branch is the
 
 What I got?
 -----------
+It will be rendered to html widget containing information about last commits to repository. See index.html.
 
 Configuration
 -------------
@@ -49,9 +44,9 @@ You might also limit the length of commit message, by 'limitMessageTo' parameter
 -----------
 For github.commits.widget I've used:
 
-1. https://github.com/fitzgen/github-api
-2. http://pajhome.org.uk/crypt/md5
-3. 
+1. <https://github.com/fitzgen/github-api>
+2. <http://pajhome.org.uk/crypt/md5>
+3. <http://www.smallsharptools.com/Projects/Packer/>
 	
 
 
