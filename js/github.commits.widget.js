@@ -19,7 +19,7 @@
 			var last = widget.options.last == undefined ? 0 : widget.options.last;
 			var limitMessage = widget.options.limitMessageTo == undefined ? 0 : widget.options.limitMessageTo;
 			
-			element.append('<h5>Widget intitalization, please wait...</h5>');
+			element.append('<h3>Widget intitalization, please wait...</h3>');
 			gh.commit.forBranch(user, repo, branch, function (data) {
 				var commits = data.commits;
 				var totalCommits = (last < commits.length ? last : commits.length);
@@ -37,6 +37,7 @@
 						'</li>');
 				}
 				element.append('</ul>');
+				element.append('<br/><h5>github commit widget by <a href="https://github.com/alexanderbeletsky">Alexander Beletsky</a></h5>');
 				
 				function avatar(email) {
 					var emailHash = hex_md5(email);
@@ -69,13 +70,13 @@
 								return 'just now';
 							}
 							
-							return '' + differenceInMinutes + ' minutes ago';
+							return 'about ' + differenceInMinutes + ' minutes ago';
 						}
 						
-						return '' + differenceInHours + ' hours ago';
+						return 'about ' + differenceInHours + ' hours ago';
 					}
 					
-					return '' + differenceInDays + ' days ago';
+					return differenceInDays + ' days ago';
 				}
 			});
 		}
