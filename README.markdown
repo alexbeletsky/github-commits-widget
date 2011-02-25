@@ -8,10 +8,13 @@ This is a very simple to use widget that perfect for open source projects sites.
 How to use
 ----------
 1. Place 'github.commits.widget-min.js'  into your javascript folder.
-2. Add div to hold the information, ' <div id="github-commits"></div> '.
-3. Add reference to widget script, ' <script src="js/mylibs/github.commits.widget.combined-min.js"></script> '.
-4. Add script such script on page.
+2. Add div to hold the information
+	<div id="github-commits"></div>.
 	
+3. Add reference to widget script 
+	<script src="js/mylibs/github.commits.widget.combined-min.js"></script>.
+	
+4. Add script such script on page.
 	<script>
 		$(function() {
 			$('#github-commits').githubInfoWidget(
