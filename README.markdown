@@ -44,9 +44,9 @@ You might also limit the length of commit message, by 'limitMessageTo' parameter
 -----------
 For github.commits.widget I've used:
 
-1. <https://github.com/fitzgen/github-api>
-2. <http://pajhome.org.uk/crypt/md5>
-3. <http://www.smallsharptools.com/Projects/Packer/>
+* <https://github.com/fitzgen/github-api>
+* <http://pajhome.org.uk/crypt/md5>
+* <http://www.smallsharptools.com/Projects/Packer/>
 	
 
 
