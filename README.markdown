@@ -9,10 +9,10 @@ How to use
 ----------
 1. Place 'github.commits.widget-min.js'  into your javascript folder.
 2. Add div to hold the information
-	<div id="github-commits"></div>.
+	'<div id="github-commits"></div>'.
 	
 3. Add reference to widget script 
-	<script src="js/mylibs/github.commits.widget.combined-min.js"></script>.
+	'<script src="js/mylibs/github.commits.widget.combined-min.js"></script>'.
 	
 4. Add script such script on page.
 	<script>
@@ -22,10 +22,39 @@ How to use
 		});
 	</script>
 
-where, user is your github accout, repo is name of repository and branch is the name of branch you want to track.
+where, user is your github account, repo is name of repository and branch is the name of branch you want to track.
+
+What I got?
+-----------
 
 Configuration
 -------------
+You might limit number commits shown in widget by providing with 'last' parameter:
+	<script>
+		$(function() {
+			$('#github-commits').githubInfoWidget(
+				{ user: 'alexanderbeletsky', repo: 'trackyt.api.csharp', branch: 'master', last: 15 });
+		});
+	</script>
+	
+You might also limit the length of commit message, by 'limitMessageTo' parameter:
+	<script>
+		$(function() {
+			$('#github-commits').githubInfoWidget(
+				{ user: 'alexanderbeletsky', repo: 'trackyt.api.csharp', branch: 'master', last: 15, limitMessageTo: 30 });
+		});
+	</script>
+	
+3rd parties
+-----------
+For github.commits.widget I've used:
+
+1. https://github.com/fitzgen/github-api
+2. http://pajhome.org.uk/crypt/md5
+3. 
+	
+
+
 
 
 
