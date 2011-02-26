@@ -37,7 +37,7 @@
 						'</li>');
 				}
 				element.append('</ul>');
-				element.append('<br/><h5>github commit widget by <a href="https://github.com/alexanderbeletsky">Alexander Beletsky</a></h5>');
+				element.append('<br/><h5>by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></h5>');
 				
 				function avatar(email) {
 					var emailHash = hex_md5(email);
