@@ -25,10 +25,10 @@
 				var totalCommits = (last < commits.length ? last : commits.length);
 				
 				element.empty();
-				element.append('<ul>');
+				var list = $('<ul>').appendTo(element);
 				
 				for (var c = 0; c < totalCommits; c++) {
-					element.append(
+					list.append(
 						'<li>' +
 						' ' + avatar(commits[c].author.email) +
 						' ' + author(commits[c].author.login) + 
@@ -36,7 +36,6 @@
 						' ' + when(commits[c].committed_date) + 
 						'</li>');
 				}
-				element.append('</ul>');
 				element.append('<br/><h5>by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></h5>');
 				
 				function avatar(email) {
