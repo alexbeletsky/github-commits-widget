@@ -32,7 +32,7 @@
 						'<li>' +
 						' ' + avatar(commits[c].author.email) +
 						' ' + author(commits[c].author.login) + 
-						' commited ' + message(commits[c].message, commits[c].url) + 
+						' committed ' + message(commits[c].message, commits[c].url) + 
 						' ' + when(commits[c].committed_date) + 
 						'</li>');
 				}
