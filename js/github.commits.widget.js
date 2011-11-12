@@ -1,7 +1,8 @@
 (function ($) {
-	function widget(element, options) {
+	function widget(element, options, callback) {
 		this.element = element;
 		this.options = options;
+		this.callback = $.isFunction(callback) ? callback : $.noop;
 	}
 	
 	widget.prototype = (function() {
@@ -11,7 +12,7 @@
 				widget.element.append('<span class="error">Options for widget are not set.</span>');
 				return;
 			}
-		
+		        var callback = widget.callback;
 			var element = widget.element;
 			var user = widget.options.user;
 			var repo = widget.options.repo;
@@ -37,6 +38,7 @@
 						'</li>');
 				}
 				element.append('<br/><h5>by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></h5>');
+				callback(element);
 				
 				function avatar(email) {
 					var emailHash = hex_md5(email);
@@ -88,8 +90,8 @@
 		
 	})();
 
-	$.fn.githubInfoWidget = function(options) {
-		var w = new widget(this, options);
+	$.fn.githubInfoWidget = function(options, callback) {
+		var w = new widget(this, options, callback);
 		w.run();
 		
 		return this;
