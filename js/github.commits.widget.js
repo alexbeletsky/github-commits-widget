@@ -33,7 +33,7 @@
 						'<li>' +
 						' ' + avatar(commits[c].author.email) +
 						' ' + author(commits[c].author.login) + 
-						' commited ' + message(commits[c].message, commits[c].url) + 
+						' committed ' + message(commits[c].message, commits[c].url) + 
 						' ' + when(commits[c].committed_date) + 
 						'</li>');
 				}
@@ -42,11 +42,11 @@
 				
 				function avatar(email) {
 					var emailHash = hex_md5(email);
-					return '<img src="http://www.gravatar.com/avatar/' + emailHash + '?s=20"/>';
+					return '<img class="github-avatar" src="http://www.gravatar.com/avatar/' + emailHash + '?s=20"/>';
 				}
 				
 				function author(login) {
-					return '<a href="https://github.com/' + login + '">' + login + '</a>';
+					return '<a class="github-user" href="https://github.com/' + login + '">' + login + '</a>';
 				}
 				
 				function message(commitMessage, url) {
@@ -54,7 +54,7 @@
 					{
 						commitMessage = commitMessage.substr(0, limitMessage) + '...';
 					}
-					return '"' + '<a href="https://github.com' + url + '">' + commitMessage + '</a>"';
+					return '"' + '<a class="github-commit" href="https://github.com' + url + '">' + commitMessage + '</a>"';
 				}
 				
 				function when(commitDate) {
