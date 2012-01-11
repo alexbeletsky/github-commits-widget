@@ -76,8 +76,9 @@
 						}
 
 						return 'about ' + differenceInHours + ' hours ago';
-					}
-
+					}else if (differenceInDays == 1) {
+                        return 'yesterday';
+                    }
 					return differenceInDays + ' days ago';
 				}
 			});

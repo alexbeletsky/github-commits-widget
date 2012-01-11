@@ -116,6 +116,6 @@ function message(commitMessage,url){if(limitMessage>0&&commitMessage.length>limi
 return'"'+'<a class="github-commit" href="https://github.com'+url+'">'+commitMessage+'</a>"';}
 function when(commitDate){var commitTime=new Date(commitDate).getTime();var todayTime=new Date().getTime();var differenceInDays=Math.floor(((todayTime-commitTime)/(24*3600*1000)));if(differenceInDays==0){var differenceInHours=Math.floor(((todayTime-commitTime)/(3600*1000)));if(differenceInHours==0){var differenceInMinutes=Math.floor(((todayTime-commitTime)/(600*1000)));if(differenceInMinutes==0){return'just now';}
 return'about '+differenceInMinutes+' minutes ago';}
-return'about '+differenceInHours+' hours ago';}
+return'about '+differenceInHours+' hours ago';}else if(differenceInDays==1){return'yesterday';}
 return differenceInDays+' days ago';}});}
 return{run:function(){_widgetRun(this);}};})();$.fn.githubInfoWidget=function(options,callback){var w=new widget(this,options,callback);w.run();return this;}})(jQuery);
