@@ -21,7 +21,7 @@
 			var last = widget.options.last == undefined ? 0 : widget.options.last;
 			var limitMessage = widget.options.limitMessageTo == undefined ? 0 : widget.options.limitMessageTo;
 
-			element.append('<h3>Widget intitalization, please wait...</h3>');
+			element.append('<p>Widget intitalization, please wait...</p>');
 			gh.commit.forBranch(user, repo, branch, function (data) {
 				var commits = data.commits;
 				var totalCommits = (last < commits.length ? last : commits.length);
@@ -38,7 +38,7 @@
 						' ' + when(commits[c].committed_date) +
 						'</li>');
 				}
-				element.append('<br/><h5>by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></h5>');
+				element.append('<p class="github-commits-widget-by">by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></p>');
 				callback(element);
 
 				function avatar(email, size) {
@@ -76,8 +76,9 @@
 						}
 
 						return 'about ' + differenceInHours + ' hours ago';
-					}
-
+					}else if (differenceInDays == 1) {
+                        return 'yesterday';
+                    }
 					return differenceInDays + ' days ago';
 				}
 			});
