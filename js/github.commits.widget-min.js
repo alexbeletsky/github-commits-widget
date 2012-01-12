@@ -118,4 +118,4 @@ function when(commitDate){var commitTime=new Date(commitDate).getTime();var toda
 return'about '+differenceInMinutes+' minutes ago';}
 return'about '+differenceInHours+' hours ago';}
 return differenceInDays+' days ago';}});}
-return{run:function(){_widgetRun(this);}};})();$.fn.githubInfoWidget=function(options){var w=new widget(this,options);w.run();return this;}})(jQuery);
+return{run:function(){_widgetRun(this);}};})();$.fn.githubInfoWidget=function(options){this.each(function(){var w=new widget($(this),options);w.run();});return this;}})(jQuery);

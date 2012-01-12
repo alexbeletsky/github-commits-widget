@@ -90,8 +90,10 @@
 	})();
 
 	$.fn.githubInfoWidget = function(options) {
-		var w = new widget(this, options);
-		w.run();
+		this.each (function () {
+			var w = new widget($(this), options);
+			w.run();
+		});
 		
 		return this;
 	}
