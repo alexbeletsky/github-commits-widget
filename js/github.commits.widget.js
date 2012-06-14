@@ -41,7 +41,7 @@
                        commit = commits[c];
 					list.append(
 						'<li>' +
-						//' ' + avatar(commit.commit.committer.email, avatarSize) +
+						' ' + ((commit.author != null) ? avatar(commit.author.gravatar_id, avatarSize) : "")+
                         ' ' + ((commit.author != null) ? author(commit.author.login) : commit.commit.committer.name) +
 						' committed ' + message(commit.commit.message, commit.commit.url) +
 						' ' + when(commit.commit.committer.date) +
@@ -50,9 +50,8 @@
 				element.append('<p class="github-commits-widget-by">by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></p>');
 				callback(element);
 
-				function avatar(email, size) {
-					var emailHash = hex_md5(email);
-					return '<img class="github-avatar" src="http://www.gravatar.com/avatar/' + emailHash + '?s=' + size + '"/>';
+				function avatar(hash, size) {
+					return '<img class="github-avatar" src="http://www.gravatar.com/avatar/' + hash + '?s=' + size + '"/>';
 				}
 
 				function author(login) {
