@@ -4,6 +4,14 @@
 		this.options = options;
 		this.callback = $.isFunction(callback) ? callback : $.noop;
 	}
+ 
+    function getCommits(user, repo, branch, callback) {
+        $.ajax({
+        url: "https://api.github.com/repos/" + user + "/" + repo + "/commits?sha=" + branch,
+        dataType: 'jsonp',
+        success: callback
+        });
+    }
 
 	widget.prototype = (function() {
 
@@ -22,20 +30,21 @@
 			var limitMessage = widget.options.limitMessageTo == undefined ? 0 : widget.options.limitMessageTo;
 
 			element.append('<p>Widget intitalization, please wait...</p>');
-			gh.commit.forBranch(user, repo, branch, function (data) {
-				var commits = data.commits;
+			getCommits(user, repo, branch, function (data) {
+				var commits = data.data;
 				var totalCommits = (last < commits.length ? last : commits.length);
 
 				element.empty();
 				var list = $('<ul>').appendTo(element);
 
 				for (var c = 0; c < totalCommits; c++) {
+                       commit = commits[c];
 					list.append(
 						'<li>' +
-						' ' + avatar(commits[c].author.email, avatarSize) +
-						' ' + author(commits[c].author.login) +
-						' committed ' + message(commits[c].message, commits[c].url) +
-						' ' + when(commits[c].committed_date) +
+						//' ' + avatar(commit.commit.committer.email, avatarSize) +
+                        ' ' + ((commit.author != null) ? author(commit.author.login) : commit.commit.committer.name) +
+						' committed ' + message(commit.commit.message, commit.commit.url) +
+						' ' + when(commit.commit.committer.date) +
 						'</li>');
 				}
 				element.append('<p class="github-commits-widget-by">by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></p>');
@@ -47,7 +56,7 @@
 				}
 
 				function author(login) {
-					return '<a class="github-user" href="https://github.com/' + login + '">' + login + '</a>';
+                    return '<a class="github-user" href="https://github.com/' + login + '">' + login + '</a>';
 				}
 
 				function message(commitMessage, url) {
