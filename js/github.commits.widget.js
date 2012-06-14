@@ -43,7 +43,7 @@
 						'<li>' +
 						' ' + ((commit.author != null) ? avatar(commit.author.gravatar_id, avatarSize) : "")+
                         ' ' + ((commit.author != null) ? author(commit.author.login) : commit.commit.committer.name) +
-						' committed ' + message(commit.commit.message, commit.commit.url) +
+						' committed ' + message(commit.commit.message, commit.sha) +
 						' ' + when(commit.commit.committer.date) +
 						'</li>');
 				}
@@ -58,12 +58,12 @@
                     return '<a class="github-user" href="https://github.com/' + login + '">' + login + '</a>';
 				}
 
-				function message(commitMessage, url) {
+				function message(commitMessage, sha) {
 					if (limitMessage > 0 && commitMessage.length > limitMessage)
 					{
 						commitMessage = commitMessage.substr(0, limitMessage) + '...';
 					}
-					return '"' + '<a class="github-commit" href="https://github.com' + url + '">' + commitMessage + '</a>"';
+					return '"' + '<a class="github-commit" href="https://github.com/' + user + '/' + repo + '/commit/' + sha + '">' + commitMessage + '</a>"';
 				}
 
 				function when(commitDate) {
