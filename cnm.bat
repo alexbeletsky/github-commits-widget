@@ -8,5 +8,4 @@ IF EXIST "%ProgramFiles(x86)%" (
 )
 
 cd ./js/
-%PACKER% -o github.commits.widget-min.js -m combine github.js md5.js github.commits.widget.js
-%PACKER% -o github.commits.widget-min.js -m jsmin github.commits.widget-min.js
+%PACKER% -o github.commits.widget-min.js -m jsmin github.commits.widget.js

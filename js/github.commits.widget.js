@@ -5,15 +5,15 @@
 		this.callback = $.isFunction(callback) ? callback : $.noop;
 	}
  
-    function getCommits(user, repo, branch, callback) {
-        $.ajax({
-	        url: "https://api.github.com/repos/" + user + "/" + repo + "/commits?sha=" + branch,
-	        dataType: 'jsonp',
-	        success: callback
-        });
-    }
-
 	widget.prototype = (function() {
+
+	    function getCommits(user, repo, branch, callback) {
+	        $.ajax({
+		        url: "https://api.github.com/repos/" + user + "/" + repo + "/commits?sha=" + branch,
+		        dataType: 'jsonp',
+		        success: callback
+	        });
+	    }
 
 		function _widgetRun(widget) {
 			if (!widget.options) {
@@ -102,8 +102,8 @@
 
 	$.fn.githubInfoWidget = function(options, callback) {
 		this.each(function () {
-			var w = new widget($(this), options, callback);
-			w.run();
+			new widget($(this), options, callback)
+				.run();
 		});
 		return this;
 	}
