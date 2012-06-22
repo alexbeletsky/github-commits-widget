@@ -3,7 +3,7 @@ github.commits.widget javascript
 
 Overview
 --------
-This is a very simple to use widget that perfect for open source projects sites. On open source project site you tipically want's to show how active is your development is. Namely, how many commits your project have.. how offten are they. 
+This is a very simple to use widget that perfect for open source projects sites. On open source project site you typically want to show how active is your development is. Namely, how many commits your project have.. how often are they. 
 
 How to use
 ----------
@@ -12,7 +12,7 @@ Reference 'github.commits.widget-min.js' and containter div and place such scrip
 	<script>
 		$(function() {
 			$('#github-commits').githubInfoWidget(
-				{ user: 'alexanderbeletsky', repo: 'trackyt.api.csharp', branch: 'master' });
+				{ user: 'alexanderbeletsky', repo: 'github.commits.widget', branch: 'master' });
 		});
 	</script>
 
@@ -25,31 +25,34 @@ It will be rendered to html widget containing information about last commits to 
 Configuration
 -------------
 You might limit number commits shown in widget by providing with 'last' parameter:
+
 	<script>
 		$(function() {
 			$('#github-commits').githubInfoWidget(
-				{ user: 'alexanderbeletsky', repo: 'trackyt.api.csharp', branch: 'master', last: 15 });
+				{ user: 'alexanderbeletsky', repo: 'github.commits.widget', branch: 'master', last: 15 });
 		});
 	</script>
-	
+
 You might also limit the length of commit message, by 'limitMessageTo' parameter:
+
 	<script>
 		$(function() {
 			$('#github-commits').githubInfoWidget(
 				{ user: 'alexanderbeletsky', repo: 'trackyt.api.csharp', branch: 'master', last: 15, limitMessageTo: 30 });
 		});
 	</script>
-	
+
+You can control the avatar size (in pixels) by providing avatarSize option. Default value is 20px.
+
+	<script>
+		$(function() {
+			$('#github-commits').githubInfoWidget(
+				{ user: 'alexanderbeletsky', repo: 'trackyt.api.csharp', branch: 'master', last: 15, limitMessageTo: 30, avatarSize: 33 });
+		});
+	</script>
+
 3rd parties
 -----------
 For github.commits.widget I've used:
 
-* <https://github.com/fitzgen/github-api>
-* <http://pajhome.org.uk/crypt/md5>
 * <http://www.smallsharptools.com/Projects/Packer/>
-	
-
-
-
-
-
