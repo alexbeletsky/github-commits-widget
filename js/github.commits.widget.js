@@ -7,9 +7,9 @@
  
     function getCommits(user, repo, branch, callback) {
         $.ajax({
-        url: "https://api.github.com/repos/" + user + "/" + repo + "/commits?sha=" + branch,
-        dataType: 'jsonp',
-        success: callback
+	        url: "https://api.github.com/repos/" + user + "/" + repo + "/commits?sha=" + branch,
+	        dataType: 'jsonp',
+	        success: callback
         });
     }
 
@@ -38,10 +38,10 @@
 				var list = $('<ul>').appendTo(element);
 
 				for (var c = 0; c < totalCommits; c++) {
-                       commit = commits[c];
+                    var commit = commits[c];
 					list.append(
 						'<li>' +
-						' ' + ((commit.author != null) ? avatar(commit.author.gravatar_id, avatarSize) : "")+
+						' ' + ((commit.author != null) ? avatar(commit.author.gravatar_id, avatarSize) : '')+
                         ' ' + ((commit.author != null) ? author(commit.author.login) : commit.commit.committer.name) +
 						' committed ' + message(commit.commit.message, commit.sha) +
 						' ' + when(commit.commit.committer.date) +
@@ -84,7 +84,7 @@
 						}
 
 						return 'about ' + differenceInHours + ' hours ago';
-					}else if (differenceInDays == 1) {
+					} else if (differenceInDays == 1) {
                         return 'yesterday';
                     }
 					return differenceInDays + ' days ago';
