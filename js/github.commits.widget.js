@@ -59,11 +59,12 @@
 				}
 
 				function message(commitMessage, sha) {
+					var originalCommitMessage = commitMessage;
 					if (limitMessage > 0 && commitMessage.length > limitMessage)
 					{
 						commitMessage = commitMessage.substr(0, limitMessage) + '...';
 					}
-					return '"' + '<a class="github-commit" href="https://github.com/' + user + '/' + repo + '/commit/' + sha + '">' + commitMessage + '</a>"';
+					return '"' + '<a class="github-commit" title="' + originalCommitMessage + '" href="https://github.com/' + user + '/' + repo + '/commit/' + sha + '">' + commitMessage + '</a>"';
 				}
 
 				function when(commitDate) {
