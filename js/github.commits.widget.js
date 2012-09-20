@@ -43,7 +43,7 @@
                         '<li ' + itemClass(c, totalCommits) + ' >' +
                         ' ' + ((commit.author !== null) ? avatar(commit.author.gravatar_id, avatarSize) : '') +
                         ' ' + ((commit.author !== null) ? author(commit.author.login) : commit.commit.committer.name) +
-                        ' committed ' + message(commit.commit.message, commit.sha) +
+                        ' committed ' + message(replaceHtmlTags(commit.commit.message), commit.sha) +
                         ' ' + when(commit.commit.committer.date) +
                         '</li>');
                 }
@@ -74,6 +74,13 @@
                         commitMessage = commitMessage.substr(0, limitMessage) + '...';
                     }
                     return '"' + '<a class="github-commit" title="' + originalCommitMessage + '" href="https://github.com/' + user + '/' + repo + '/commit/' + sha + '">' + commitMessage + '</a>"';
+                }
+
+                function replaceHtmlTags(message) {
+                    return message.replace(/&/g, "&amp;")
+                                    .replace(/>/g, "&gt;")
+                                    .replace(/</g, "&lt;")
+                                    .replace(/"/g, "&quot;");
                 }
 
                 function when(commitDate) {
