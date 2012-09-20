@@ -51,6 +51,9 @@ You can control the avatar size (in pixels) by providing avatarSize option. Defa
 		});
 	</script>
 
+How is using it?
+----------------
+
 3rd parties
 -----------
 For github.commits.widget I've used:
