@@ -35,18 +35,12 @@
                 var totalCommits = (last < commits.length ? last : commits.length);
 
                 element.empty();
-                var list = $('<ul>').appendTo(element);
 
+                var list = $('<ul>').appendTo(element);
                 for (var c = 0; c < totalCommits; c++) {
                     var commit = commits[c];
-                    var li_elem = '<li>';
-                    if (c === 0) {
-                        li_elem = '<li class="first">';
-                    } else if (c === totalCommits - 1) {
-                        li_elem = '<li class="last">';
-                    }
                     list.append(
-                        li_elem +
+                        '<li ' + itemClass(c, totalCommits) + ' >' +
                         ' ' + ((commit.author !== null) ? avatar(commit.author.gravatar_id, avatarSize) : '') +
                         ' ' + ((commit.author !== null) ? author(commit.author.login) : commit.commit.committer.name) +
                         ' committed ' + message(commit.commit.message, commit.sha) +
@@ -55,6 +49,15 @@
                 }
                 element.append('<p class="github-commits-widget-by">by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></p>');
                 callback(element);
+
+                function itemClass(current, totalCommits) {
+                    if (current === 0) {
+                        return 'class="first"';
+                    } else if (current === totalCommits - 1) {
+                        return 'class="last"';
+                    }
+                    return '';
+                }
 
                 function avatar(hash, size) {
                     return '<img class="github-avatar" src="http://www.gravatar.com/avatar/' + hash + '?s=' + size + '"/>';
