@@ -26,8 +26,8 @@
             var repo = widget.options.repo;
             var branch = widget.options.branch;
             var avatarSize = widget.options.avatarSize || 20;
-            var last = widget.options.last == undefined ? 0 : widget.options.last;
-            var limitMessage = widget.options.limitMessageTo == undefined ? 0 : widget.options.limitMessageTo;
+            var last = widget.options.last === undefined ? 0 : widget.options.last;
+            var limitMessage = widget.options.limitMessageTo === undefined ? 0 : widget.options.limitMessageTo;
 
             element.append('<p>Widget intitalization, please wait...</p>');
             getCommits(user, repo, branch, function (data) {
@@ -47,8 +47,8 @@
                     }
                     list.append(
                         li_elem +
-                        ' ' + ((commit.author != null) ? avatar(commit.author.gravatar_id, avatarSize) : '')+
-                        ' ' + ((commit.author != null) ? author(commit.author.login) : commit.commit.committer.name) +
+                        ' ' + ((commit.author !== null) ? avatar(commit.author.gravatar_id, avatarSize) : '') +
+                        ' ' + ((commit.author !== null) ? author(commit.author.login) : commit.commit.committer.name) +
                         ' committed ' + message(commit.commit.message, commit.sha) +
                         ' ' + when(commit.commit.committer.date) +
                         '</li>');
@@ -78,11 +78,11 @@
                     var todayTime = new Date().getTime();
 
                     var differenceInDays = Math.floor(((todayTime - commitTime)/(24*3600*1000)));
-                    if (differenceInDays == 0) {
+                    if (differenceInDays === 0) {
                         var differenceInHours = Math.floor(((todayTime - commitTime)/(3600*1000)));
-                        if (differenceInHours == 0) {
+                        if (differenceInHours === 0) {
                             var differenceInMinutes = Math.floor(((todayTime - commitTime)/(600*1000)));
-                            if (differenceInMinutes == 0) {
+                            if (differenceInMinutes === 0) {
 
                                 return 'just now';
                             }
@@ -113,6 +113,6 @@
                 .run();
         });
         return this;
-    }
+    };
 
 })(jQuery);
