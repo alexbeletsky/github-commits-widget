@@ -36,7 +36,7 @@
 
                 element.empty();
 
-                var list = $('<ul>').appendTo(element);
+                var list = $('<ul class="github-commits-list">').appendTo(element);
                 for (var c = 0; c < totalCommits; c++) {
                     var commit = commits[c];
                     list.append(
