@@ -39,14 +39,14 @@
 
 				for (var c = 0; c < totalCommits; c++) {
                     var commit = commits[c];
-                    var li_div = '<li>';
+                    var li_elem = '<li>';
                     if (c === 0) {
-                    	li_div = '<li class="github-list-begin">';
-                    } else if (c+1 === totalCommits) {
-                    	li_div = '<li class="github-list-end">';
+                    	li_elem = '<li class="first">';
+                    } else if (c === totalCommits - 1) {
+                    	li_elem = '<li class="last">';
                     }
 					list.append(
-						li_div +
+						li_elem +
 						' ' + ((commit.author != null) ? avatar(commit.author.gravatar_id, avatarSize) : '')+
                         ' ' + ((commit.author != null) ? author(commit.author.login) : commit.commit.committer.name) +
 						' committed ' + message(commit.commit.message, commit.sha) +
