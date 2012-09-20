@@ -39,8 +39,14 @@
 
 				for (var c = 0; c < totalCommits; c++) {
                     var commit = commits[c];
+                    var li_div = '<li>';
+                    if (c === 0) {
+                    	li_div = '<li class="github-list-begin">';
+                    } else if (c+1 === totalCommits) {
+                    	li_div = '<li class="github-list-end">';
+                    }
 					list.append(
-						'<li>' +
+						li_div +
 						' ' + ((commit.author != null) ? avatar(commit.author.gravatar_id, avatarSize) : '')+
                         ' ' + ((commit.author != null) ? author(commit.author.login) : commit.commit.committer.name) +
 						' committed ' + message(commit.commit.message, commit.sha) +
