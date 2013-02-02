@@ -7,7 +7,7 @@ This is a very simple to use widget that perfect for open source projects sites.
 
 How to use
 ----------
-Reference 'github.commits.widget-min.js' and containter div and place such script.
+Reference 'github.commits.widget-min.js' and container div and place such script.
 
 ```html
 <script>
