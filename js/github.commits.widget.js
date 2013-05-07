@@ -4,7 +4,7 @@
         this.options = options;
         this.callback = $.isFunction(callback) ? callback : $.noop;
     }
- 
+
     widget.prototype = (function() {
 
         function getCommits(user, repo, branch, callback) {
