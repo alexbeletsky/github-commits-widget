@@ -1,8 +1,6 @@
 github.commits.widget
 =================
 
-Overview
---------
 This is a very simple to use widget that perfect for open source projects sites. On open source project site you typically want to show how active is your development is. Namely, how many commits your project have and how often are they.
 
 Installation
