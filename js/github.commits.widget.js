@@ -37,26 +37,31 @@
 
                 var list = $('<ul class="github-commits-list">').appendTo(element);
                 for (var c = 0; c < totalCommits; c++) {
-                    var commit = commits[c];
-                    list.append(
-                        '<li ' + itemClass(c, totalCommits) + ' >' +
-                        ' ' + ((commit.author !== null) ? avatar(commit.author.gravatar_id, avatarSize) : '') +
-                        ' ' + ((commit.author !== null) ? author(commit.author.login) : commit.commit.committer.name) +
-                        ' committed ' + message(replaceHtmlTags(commit.commit.message), commit.sha) +
-                        ' ' + when(commit.commit.committer.date) +
-                        '</li>');
-                }
-                element.append('<p class="github-commits-widget-by">by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></p>');
-                callback(element);
+                    var cur = commits[c];
+                    var li = $("<li>");
 
-                function itemClass(current, totalCommits) {
-                    if (current === 0) {
-                        return 'class="first"';
-                    } else if (current === totalCommits - 1) {
-                        return 'class="last"';
+                    var e_user = $('<span class="github-user">');
+                    //add avatar & github link if possible
+                    if (cur.author !== null) {
+                        e_user.append(avatar(cur.author.gravatar_id, avatarSize));
+                        e_user.append(author(cur.author.login));
                     }
-                    return '';
+                    else //otherwise just list the name
+                    {
+                        e_user.append(cur.commit.committer.name);
+                    }
+
+                    li.append(e_user);
+
+                    //add commit message
+                    li.append(message(cur.commit.message, cur.sha));
+                    li.append(when(cur.commit.committer.date));
+
+                    list.append(li);
                 }
+
+
+                callback(element);
 
                 function avatar(hash, size) {
                     return $('<img>')
