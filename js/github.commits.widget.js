@@ -59,11 +59,15 @@
                 }
 
                 function avatar(hash, size) {
-                    return '<img class="github-avatar" src="http://www.gravatar.com/avatar/' + hash + '?s=' + size + '"/>';
+                    return $('<img>')
+                            .attr('class', 'github-avatar')
+                            .attr('src', 'https://www.gravatar.com/avatar/' + hash + '?s=' + size);
                 }
 
                 function author(login) {
-                    return '<a class="github-user" href="https://github.com/' + login + '">' + login + '</a>';
+                    return  $('<a>')
+                            .attr("href", 'https://github.com/' + login)
+                            .text(login);
                 }
 
                 function message(commitMessage, sha) {
@@ -72,14 +76,13 @@
                     {
                         commitMessage = commitMessage.substr(0, limitMessage) + '...';
                     }
-                    return '"' + '<a class="github-commit" title="' + originalCommitMessage + '" href="https://github.com/' + user + '/' + repo + '/commit/' + sha + '">' + commitMessage + '</a>"';
-                }
 
-                function replaceHtmlTags(message) {
-                    return message.replace(/&/g, "&amp;")
-                                    .replace(/>/g, "&gt;")
-                                    .replace(/</g, "&lt;")
-                                    .replace(/"/g, "&quot;");
+                    var link = $('<a class="github-commit"></a>')
+                      .attr("title", originalCommitMessage)
+                      .attr("href", 'https://github.com/' + user + '/' + repo + '/commit/' + sha)
+                      .text(commitMessage);
+
+                    return link;
                 }
 
                 function when(commitDate) {
