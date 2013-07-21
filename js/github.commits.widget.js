@@ -29,7 +29,6 @@
             var last = widget.options.last === undefined ? 0 : widget.options.last;
             var limitMessage = widget.options.limitMessageTo === undefined ? 0 : widget.options.limitMessageTo;
 
-            element.append('<p>Widget intitalization, please wait...</p>');
             getCommits(user, repo, branch, function (data) {
                 var commits = data.data;
                 var totalCommits = (last < commits.length ? last : commits.length);
