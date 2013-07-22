@@ -1,3 +1,31 @@
+/*
+
+https://github.com/alexanderbeletsky/github-commits-widget
+
+# Legal Info (MIT License)
+
+Copyright (c) 2012 Alexander Beletsky
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+
 (function ($) {
     function widget(element, options, callback) {
         this.element = element;
@@ -29,7 +57,6 @@
             var last = widget.options.last === undefined ? 0 : widget.options.last;
             var limitMessage = widget.options.limitMessageTo === undefined ? 0 : widget.options.limitMessageTo;
 
-            element.append('<p>Widget intitalization, please wait...</p>');
             getCommits(user, repo, branch, function (data) {
                 var commits = data.data;
                 var totalCommits = (last < commits.length ? last : commits.length);
@@ -38,33 +65,42 @@
 
                 var list = $('<ul class="github-commits-list">').appendTo(element);
                 for (var c = 0; c < totalCommits; c++) {
-                    var commit = commits[c];
-                    list.append(
-                        '<li ' + itemClass(c, totalCommits) + ' >' +
-                        ' ' + ((commit.author !== null) ? avatar(commit.author.gravatar_id, avatarSize) : '') +
-                        ' ' + ((commit.author !== null) ? author(commit.author.login) : commit.commit.committer.name) +
-                        ' committed ' + message(replaceHtmlTags(commit.commit.message), commit.sha) +
-                        ' ' + when(commit.commit.committer.date) +
-                        '</li>');
+                    var cur = commits[c];
+                    var li = $("<li>");
+
+                    var e_user = $('<span class="github-user">');
+                    //add avatar & github link if possible
+                    if (cur.author !== null) {
+                        e_user.append(avatar(cur.author.gravatar_id, avatarSize));
+                        e_user.append(author(cur.author.login));
+                    }
+                    else //otherwise just list the name
+                    {
+                        e_user.append(cur.commit.committer.name);
+                    }
+
+                    li.append(e_user);
+
+                    //add commit message
+                    li.append(message(cur.commit.message, cur.sha));
+                    li.append(when(cur.commit.committer.date));
+
+                    list.append(li);
                 }
-                element.append('<p class="github-commits-widget-by">by <a href="https://github.com/alexanderbeletsky/github.commits.widget">github.commits.widget</a></p>');
+
+
                 callback(element);
 
-                function itemClass(current, totalCommits) {
-                    if (current === 0) {
-                        return 'class="first"';
-                    } else if (current === totalCommits - 1) {
-                        return 'class="last"';
-                    }
-                    return '';
-                }
-
                 function avatar(hash, size) {
-                    return '<img class="github-avatar" src="http://www.gravatar.com/avatar/' + hash + '?s=' + size + '"/>';
+                    return $('<img>')
+                            .attr('class', 'github-avatar')
+                            .attr('src', 'https://www.gravatar.com/avatar/' + hash + '?s=' + size);
                 }
 
                 function author(login) {
-                    return '<a class="github-user" href="https://github.com/' + login + '">' + login + '</a>';
+                    return  $('<a>')
+                            .attr("href", 'https://github.com/' + login)
+                            .text(login);
                 }
 
                 function message(commitMessage, sha) {
@@ -73,14 +109,13 @@
                     {
                         commitMessage = commitMessage.substr(0, limitMessage) + '...';
                     }
-                    return '"' + '<a class="github-commit" title="' + originalCommitMessage + '" href="https://github.com/' + user + '/' + repo + '/commit/' + sha + '">' + commitMessage + '</a>"';
-                }
 
-                function replaceHtmlTags(message) {
-                    return message.replace(/&/g, "&amp;")
-                                    .replace(/>/g, "&gt;")
-                                    .replace(/</g, "&lt;")
-                                    .replace(/"/g, "&quot;");
+                    var link = $('<a class="github-commit"></a>')
+                      .attr("title", originalCommitMessage)
+                      .attr("href", 'https://github.com/' + user + '/' + repo + '/commit/' + sha)
+                      .text(commitMessage);
+
+                    return link;
                 }
 
                 function when(commitDate) {
